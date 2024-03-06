@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/new_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Familiar Looking Rocket.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Area.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Spawner.gd" type="Script" id=5]
+[ext_resource path="res://scenes/AlienDive.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/kenney_platformerpack/PNG/Backgrounds/colored_shroom.png" type="Texture" id=7]
+[ext_resource path="res://assets/01. Above Ground BGM.mp3" type="AudioStream" id=8]
+
+[node name="Level2" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 0, 186 )
+scale = Vector2( 0.5, 0.5 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( -458703, 0, 65541, -458702, 0, 65543, -458701, 0, 65543, -458700, 0, 65543, -458699, 0, 65543, -458698, 0, 65543, -458697, 0, 65543, -393169, 0, 65540, -327633, 0, 7, -327632, 0, 65540, -262108, 0, 65541, -262097, 0, 1, -262096, 0, 7, -262095, 0, 65540, -196573, 0, 65541, -196557, 0, 65541, -196547, 0, 3, -196546, 0, 4, -196542, 0, 3, -196541, 0, 4, -131051, 0, 65541, -131047, 0, 65542, -131046, 0, 65543, -131045, 0, 65544, -131041, 0, 65542, -131040, 0, 65543, -131039, 0, 65544, -131022, 0, 65541, -131021, 0, 8, -131001, 0, 5, -131000, 0, 65543, -130999, 0, 65543, -130998, 0, 65543, -130997, 0, 65543, -130996, 0, 65543, -130995, 0, 65543, -130994, 0, 65543, -130993, 0, 65543, -130992, 0, 65543, -65516, 0, 65541, -65515, 0, 8, -65511, 0, 1, -65510, 0, 1, -65509, 0, 1, -65505, 0, 1, -65504, 0, 1, -65503, 0, 1, -65487, 0, 65541, -65486, 0, 8, -65485, 0, 1, 19, 0, 65541, 20, 0, 8, 21, 0, 1, 25, 0, 1, 26, 0, 1, 27, 0, 1, 31, 0, 1, 32, 0, 1, 33, 0, 1, 42, 0, 3, 43, 0, 4, 47, 0, 65543, 48, 0, 65543, 65536, 0, 65543, 65537, 0, 65543, 65538, 0, 65543, 65539, 0, 65543, 65540, 0, 65543, 65541, 0, 65543, 65542, 0, 65543, 65543, 0, 65543, 65544, 0, 65543, 65545, 0, 65543, 65546, 0, 65543, 65547, 0, 65543, 65548, 0, 65543, 65549, 0, 65543, 65550, 0, 65543, 65551, 0, 65543, 65552, 0, 65543, 65561, 0, 1, 65562, 0, 1, 65563, 0, 1, 65567, 0, 1, 65568, 0, 1, 65569, 0, 1 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 58, 186 )
+collision_layer = 3
+collision_mask = 3
+speed = 300
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( -47, 104 )
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 2048, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 511, 15 )
+scale = Vector2( 1, 1.35 )
+texture = ExtResource( 7 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 2048, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 1535, 15 )
+scale = Vector2( 1, 1.35 )
+texture = ExtResource( 7 )
+
+[node name="Area2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2838, 369 )
+scale = Vector2( 340, 1 )
+sceneName = "Level2"
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2( 1811, -583 )
+script = ExtResource( 5 )
+obstacle = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 5083, -61 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" parent="Sprite" instance=ExtResource( 4 )]
+position = Vector2( 0, 20 )
+scale = Vector2( 14, 22 )
+sceneName = "WInScreen"
+
+[node name="Spawner2" type="Node2D" parent="."]
+position = Vector2( 4074, -583 )
+script = ExtResource( 5 )
+obstacle = ExtResource( 6 )
